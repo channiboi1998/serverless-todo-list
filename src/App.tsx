@@ -2,12 +2,12 @@ import { useEffect } from "react";
 import AddTodoForm from "./components/forms/AddTodoForm";
 import TodoList from "./components/todos/TodoList";
 import { useAppDispatch } from "./store";
-import { getTodos } from "./store/todo/thunks";
+import { fetchTodos } from "./store/todo/thunks";
 
 const App = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(getTodos());
+    dispatch(fetchTodos());
   }, [dispatch]);
 
   return (

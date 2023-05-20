@@ -3,7 +3,7 @@ import { createAppThunk } from "../../utilities/thunks";
 import { Todo } from "./models";
 import { ResponseError } from "../../api";
 
-export const getTodos = createAppThunk<Todo[], void>(
+export const fetchTodos = createAppThunk<Todo[], void>(
   "todo/getTodos",
   async (_, { rejectWithValue }) => {
     try {

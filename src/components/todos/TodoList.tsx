@@ -1,29 +1,27 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Todo } from "../../store/todo/models";
 import TodoItem from "./TodoItem";
+import { useSelector } from "react-redux";
+import { getTodos } from "../../store/todo/selectors";
 
 const TodoList = () => {
-  const [todos, setTodos] = useState<Todo[]>([
-    { id: "key_1", label: "Buy water", checked: true },
-  ]);
+  const todos = useSelector(getTodos);
+
+  useEffect(() => {
+    console.log(todos);
+  }, [todos]);
 
   // Handles update of todo checked status
   const updateTodo = (todoId: string): void => {
-    setTodos((prevTodos: Todo[]) => {
-      return prevTodos.map((todo: Todo) => {
-        if (todo.id === todoId) {
-          return { ...todo, checked: !todo.checked };
-        }
-        return todo;
-      });
-    });
+    console.log(todoId);
   };
 
   return (
     <div className="pb-4 pt-1">
       {todos &&
+        todos.length > 0 &&
         todos.map((todo: Todo) => (
-          <TodoItem key={todo.id} todo={todo} updateTodo={updateTodo} />
+          <TodoItem key={todo._id} todo={todo} updateTodo={updateTodo} />
         ))}
     </div>
   );

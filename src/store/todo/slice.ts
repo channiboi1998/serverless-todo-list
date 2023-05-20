@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Todo } from "./models";
-import { getTodos } from "./thunks";
+import { fetchTodos } from "./thunks";
 
 export interface TodoState {
   status: string;
@@ -18,14 +18,14 @@ export const todoSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getTodos.pending, (state) => {
+      .addCase(fetchTodos.pending, (state) => {
         state.status = "pending";
       })
-      .addCase(getTodos.fulfilled, (state, action) => {
+      .addCase(fetchTodos.fulfilled, (state, action) => {
         state.todos = action.payload;
         state.status = "fulfilled";
       })
-      .addCase(getTodos.rejected, (state) => {
+      .addCase(fetchTodos.rejected, (state) => {
         state.status = "rejected";
       });
   },
