@@ -1,12 +1,7 @@
-type Todo = {
-  id: string;
-  label: string;
-  checked: boolean;
-};
+import AddTodoForm from "./components/forms/AddTodoForm";
+import TodoList from "./components/todos/TodoList";
 
 const App = () => {
-  const todo: Todo[] = [{ id: "key_1", label: "Buy water", checked: true }];
-
   return (
     <div className="min-h-screen flex justify-center items-center shadow-lg p-4 bg-purple-800">
       {/* Todo Wrapper */}
@@ -20,30 +15,9 @@ const App = () => {
           </div>
         </div>
         {/* Todo Form */}
-        <div className="flex flex-row pt-4 pb-1">
-          <input
-            type="text"
-            className="flex-1 border p-2"
-            placeholder="Add new task"
-          />
-          <button className="p-2 ml-2 bg-purple-800 text-white">
-            Add Task
-          </button>
-        </div>
+        <AddTodoForm />
         {/* Todo List */}
-        <div className="flex flex-row items-center pb-4 pt-1">
-          {todo &&
-            todo.map((todo: Todo) => (
-              <div key={todo.id}>
-                <input
-                  type="checkbox"
-                  checked={todo.checked}
-                  className="h-4 w-4"
-                />
-                <label className="flex-1 ml-2">{todo.label}</label>
-              </div>
-            ))}
-        </div>
+        <TodoList />
       </div>
     </div>
   );
