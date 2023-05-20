@@ -4,3 +4,9 @@ export type Todo = {
   checked: boolean;
   createdAt: string;
 };
+
+export type UpdateTodo = {
+  _id: string;
+  label?: string;
+  checked?: boolean;
+};

@@ -1,6 +1,6 @@
+import { createAppThunk } from "./../../utilities/thunks";
 import axios from "axios";
-import { createAppThunk } from "../../utilities/thunks";
-import { Todo } from "./models";
+import { Todo, UpdateTodo } from "./models";
 import { ResponseError } from "../../api";
 
 export const fetchTodos = createAppThunk<Todo[], void>(
@@ -24,6 +24,23 @@ export const createTodo = createAppThunk<Todo, string>(
       const { data } = await axios.post(
         "https://anhoximxy7.execute-api.ap-southeast-2.amazonaws.com/dev/todos",
         { label }
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error as ResponseError);
+    }
+  }
+);
+
+export const updateTodo = createAppThunk<Todo, UpdateTodo>(
+  "todo/updateTodo",
+  async (updateTodo, { rejectWithValue }) => {
+    console.log(updateTodo);
+    try {
+
+      const { data } = await axios.patch(
+        "https://anhoximxy7.execute-api.ap-southeast-2.amazonaws.com/dev/todos",
+        updateTodo
       );
       return data;
     } catch (error) {

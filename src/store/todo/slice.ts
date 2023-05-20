@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Todo } from "./models";
-import { createTodo, fetchTodos } from "./thunks";
+import { createTodo, fetchTodos, updateTodo } from "./thunks";
 
 export interface TodoState {
   status: string;
@@ -30,6 +30,11 @@ export const todoSlice = createSlice({
       })
       .addCase(createTodo.fulfilled, (state, action) => {
         state.todos.push(action.payload);
+      })
+      .addCase(updateTodo.fulfilled, (state, action) => {
+        state.todos = state.todos.map((todo: Todo) =>
+          todo._id === action.payload._id ? action.payload : todo
+        );
       });
   },
 });
