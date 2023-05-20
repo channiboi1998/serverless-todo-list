@@ -6,7 +6,7 @@ import { getTodos } from "../../store/todo/selectors";
 const TodoList = () => {
   const todos = useSelector(getTodos);
   return (
-    <div className="pb-4 pt-1">
+    <div className="pb-3 pt-1">
       {todos &&
         todos.map((todo: Todo) => <TodoItem key={todo._id} todo={todo} />)}
     </div>

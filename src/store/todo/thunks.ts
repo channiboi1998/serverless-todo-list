@@ -37,10 +37,25 @@ export const updateTodo = createAppThunk<Todo, UpdateTodo>(
   async (updateTodo, { rejectWithValue }) => {
     console.log(updateTodo);
     try {
-
       const { data } = await axios.patch(
         "https://anhoximxy7.execute-api.ap-southeast-2.amazonaws.com/dev/todos",
         updateTodo
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error as ResponseError);
+    }
+  }
+);
+
+export const deleteTodo = createAppThunk<{ _id: string }, string>(
+  "todo/deleteTodo",
+  async (_id, { rejectWithValue }) => {
+    console.log(updateTodo);
+    try {
+      const { data } = await axios.delete(
+        "https://anhoximxy7.execute-api.ap-southeast-2.amazonaws.com/dev/todos",
+        { data: { _id } }
       );
       return data;
     } catch (error) {

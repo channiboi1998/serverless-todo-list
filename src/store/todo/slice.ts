@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Todo } from "./models";
-import { createTodo, fetchTodos, updateTodo } from "./thunks";
+import { createTodo, deleteTodo, fetchTodos, updateTodo } from "./thunks";
 
 export interface TodoState {
   status: string;
@@ -35,6 +35,11 @@ export const todoSlice = createSlice({
         state.todos = state.todos.map((todo: Todo) =>
           todo._id === action.payload._id ? action.payload : todo
         );
+      })
+      .addCase(deleteTodo.fulfilled, (state, action) => {
+        const deletedTodoId = action.payload._id;
+        // Filter out the deleted todo from the state array
+        state.todos = state.todos.filter((todo) => todo._id !== deletedTodoId);
       });
   },
 });

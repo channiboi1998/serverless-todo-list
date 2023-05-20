@@ -1,7 +1,7 @@
 import { useAppDispatch } from "../../store";
 import { Todo } from "../../store/todo/models";
 import clsx from "clsx";
-import { updateTodo } from "../../store/todo/thunks";
+import { deleteTodo, updateTodo } from "../../store/todo/thunks";
 
 type Props = {
   todo: Todo;
@@ -11,7 +11,7 @@ const TodoItem = ({ todo }: Props) => {
   const dispatch = useAppDispatch();
 
   return (
-    <div key={todo._id} className="flex flex-row items-center w-full">
+    <div key={todo._id} className="flex flex-row items-center w-full py-1">
       <input
         type="checkbox"
         checked={todo.checked}
@@ -34,6 +34,12 @@ const TodoItem = ({ todo }: Props) => {
         }
         defaultValue={todo.label}
       />
+      <button
+        className="text-sm py-1 px-2 h-full bg-red-200"
+        onClick={() => dispatch(deleteTodo(todo._id))}
+      >
+        x
+      </button>
     </div>
   );
 };
