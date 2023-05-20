@@ -1,4 +1,4 @@
-import { Todo } from "../../models/Todo";
+import { Todo } from "../../store/todo/models";
 import clsx from "clsx";
 
 type Props = {
