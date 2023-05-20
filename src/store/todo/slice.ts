@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Todo } from "./models";
-import { fetchTodos } from "./thunks";
+import { createTodo, fetchTodos } from "./thunks";
 
 export interface TodoState {
   status: string;
@@ -27,6 +27,9 @@ export const todoSlice = createSlice({
       })
       .addCase(fetchTodos.rejected, (state) => {
         state.status = "rejected";
+      })
+      .addCase(createTodo.fulfilled, (state, action) => {
+        state.todos.push(action.payload);
       });
   },
 });

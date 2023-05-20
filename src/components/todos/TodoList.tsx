@@ -19,7 +19,6 @@ const TodoList = () => {
   return (
     <div className="pb-4 pt-1">
       {todos &&
-        todos.length > 0 &&
         todos.map((todo: Todo) => (
           <TodoItem key={todo._id} todo={todo} updateTodo={updateTodo} />
         ))}
