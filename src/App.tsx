@@ -4,6 +4,7 @@ import TodoList from "./components/todos/TodoList";
 import { useAppDispatch } from "./store";
 import { fetchTodos } from "./store/todo/thunks";
 import { formatDate } from "./utilities/datetime";
+import Toast from "./components/toast";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -12,7 +13,8 @@ const App = () => {
   }, [dispatch]);
 
   return (
-    <div className="min-h-screen flex justify-center items-center shadow-lg p-4 bg-purple-800">
+    <div className="relative min-h-screen flex justify-center items-center shadow-lg p-4 bg-purple-800">
+      <Toast />
       {/* Todo Wrapper */}
       <div className="w-full max-w-md px-4 bg-white">
         {/* Todo Header */}

@@ -1,11 +1,13 @@
 import { useDispatch } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import todoReducer from "./todo/slice";
+import UIReducer from "./ui/slice";
 import { ResponseError } from "../api";
 
 export const store = configureStore({
   reducer: {
     todo: todoReducer,
+    UI: UIReducer,
   },
 });
 

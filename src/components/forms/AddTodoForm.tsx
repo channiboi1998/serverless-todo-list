@@ -1,6 +1,7 @@
 import { useForm, FieldValues } from "react-hook-form";
 import { useAppDispatch } from "../../store";
 import { createTodo } from "../../store/todo/thunks";
+import { setToast } from "../../store/ui/slice";
 
 type Inputs = {
   label: string;
@@ -18,8 +19,27 @@ const AddTodoForm = () => {
   const submit = (formData: FieldValues) => {
     dispatch(createTodo(formData.label))
       .unwrap()
-      .then(() => reset())
-      .catch((error) => console.log(error));
+      .then((response) => {
+        dispatch(
+          setToast({
+            open: true,
+            type: "success",
+            title: "Todo created",
+            description: `New todo "${response.label}" saved on dynamoDB.`,
+          })
+        );
+        reset();
+      })
+      .catch((error) => {
+        dispatch(
+          setToast({
+            open: true,
+            type: "danger",
+            title: error.code ?? "An error occured",
+            description: error.message ?? "Try adding todo again later.",
+          })
+        );
+      });
   };
 
   return (
