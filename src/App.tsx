@@ -3,6 +3,7 @@ import AddTodoForm from "./components/forms/AddTodoForm";
 import TodoList from "./components/todos/TodoList";
 import { useAppDispatch } from "./store";
 import { fetchTodos } from "./store/todo/thunks";
+import { formatDate } from "./utilities/datetime";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -19,7 +20,7 @@ const App = () => {
           <h1 className="flex-1 text-5xl font-semibold">Todo</h1>
           <div>
             <h3 className="text-lg font-medium">Today</h3>
-            <p className="text-sm">17 Feb 2022</p>
+            <p className="text-sm">{formatDate(new Date())}</p>
           </div>
         </div>
         {/* Todo Form */}
